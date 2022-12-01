@@ -22,6 +22,8 @@ while hoho:
     start = start + next_elf_index + 1  
 
 elves_sum = [sum(elf) for elf in elves]
-print(max(elves_sum))
+#print(max(elves_sum))
 
 #--------------------part 2 -------------------------------
+elves_sum.sort(reverse=True)
+print(sum(elves_sum[:3]))
