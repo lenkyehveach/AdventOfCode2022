@@ -43,13 +43,44 @@ def getResult(me, oppo):
 #b - paper - y
 #c  -scissors - z
 points = 0
-for i in range(len(turns)): 
-  print(opponent[i], "--", me[i], "==", myConversion[me[i]])
-  print("points: result=", str(getResult(me[i], opponent[i])), " sign= ", str(signPoints[me[i]]) )
-  print(getResult(me[i], opponent[i]) + signPoints[me[i]])
-  print("------")
-  print("===> ", points)
-  print("------")
+for i in range(len(turns)):
   points +=  getResult(me[i], opponent[i]) + signPoints[me[i]]
 
 print(points)
+
+ # --------------------------
+
+result = {
+  "X": 0, 
+  "Y": 3,
+  "Z": 6
+}
+
+loses = {
+  "A": "C", 
+  "B": "A", 
+  "C": "B"
+}
+
+beats = {
+  "A": "B", 
+  "B": "C", 
+  "C": "A"
+}
+
+
+
+def getNewResult(opp, me):
+  if me == "X": 
+    return signPoints[loses[opp]] 
+  elif me == "Y": 
+    return signPoints[opp]
+  elif me == "Z": 
+    return signPoints[beats[opp]]
+
+score2 = 0
+for i in range(len(turns)): 
+  score2 += getNewResult(opponent[i], me[i]) + result[me[i]]
+
+print(score2)
+
