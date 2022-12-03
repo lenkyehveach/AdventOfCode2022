@@ -24,14 +24,16 @@ for bag in bags:
 
 print(priorities)
 print(sum(priorities))
+print(len(bags))
 
 badges = 0
-for i in range(len(bags))[::3]: 
+for i in range(len(bags) - 2)[::3]: 
   x = set(bags[i])
   y = set(bags[i+1])
   z = set(bags[i+2])
-  print(x, "|", y, "|", z)
-  badges += alphabet.index(x.union(y,z))
+  # print(x, "|", y, "|", z)
+  # print(x.intersection(y,z))
+  badges += alphabet.index(list(x.intersection(y,z))[0]) + 1
 
 print(badges)
 
