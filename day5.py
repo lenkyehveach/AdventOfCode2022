@@ -3,7 +3,7 @@ with open("input5.txt", "r") as f:
 
 moves = moves[10:]
 moves = [move.split(" ") for move in moves]
-print(moves[0])
+#print(moves[0])
 
 initial = [
   ["J", "H", "G", "M", "Z", "N", "T", "F"], 
@@ -20,17 +20,41 @@ initial = [
 # for i in intial: 
 #   print(i)
 
+# for move in moves: 
+#   quantity = int(move[1]) 
+#   start = move[3]
+#   end = move[5]
+
+#   for x in range(quantity):
+#     crate = initial[int(start) - 1 ].pop()
+#     initial[int(end) - 1 ].append(crate)
+
+#   for y in initial: 
+#     print(y)
+
+# for t in initial: 
+
+#   print(t[-1])
+for y in initial: 
+  print(y)
+  
+
+
 for move in moves: 
   quantity = int(move[1]) 
-  start = move[3]
-  end = move[5]
+  start = int(move[3]) - 1
+  end = int(move[5]) -1 
+  print(move)
 
-  for x in range(quantity):
-    crate = initial[int(start) - 1 ].pop()
-    initial[int(end) - 1 ].append(crate)
+  crates = initial[start][-quantity:]
+  initial[start] = initial[start][:len(initial[start]) - quantity]
+  initial[end] = initial[end] + crates
 
-  for y in initial: 
-    print(y)
+  # for y in initial: 
+  #  print(y)
+  
+  # print("-----")
+
 
 for t in initial: 
 
