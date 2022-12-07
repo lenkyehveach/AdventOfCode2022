@@ -85,8 +85,19 @@ for key, value in visited.items():
     poss.append(value)
 
 print(sum(poss))
+print("-p2-")
 
+#---------------------------------------------
 
+target_size = 30000000 - (70000000 - visited["_"])
+print(target_size)
+
+cand = []
+for key, value in visited.items(): 
+  if value >= target_size: 
+    cand.append(value)
+
+print(min(cand))
 
 
 
