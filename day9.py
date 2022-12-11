@@ -56,9 +56,6 @@ locations = [(0, 0)]
 
 for d, step in zip(directions, steps): 
 
-  print(d, step)
-  print("_----")
-
   for s in range(step): 
     if d == "U": 
       y_h += 1
@@ -69,7 +66,7 @@ for d, step in zip(directions, steps):
     elif d == "L":
       x_h -= 1
 
-    print("H ", x_h, y_h)
+
       
     if x_h - x_t > 1:
       x_t += 1
@@ -97,10 +94,66 @@ for d, step in zip(directions, steps):
         x_t +=1 
       elif x_h < x_t:
         x_t -=1
-    print("t: " , x_t, y_t)
+    
 
     if (x_t, y_t) not in locations: 
       locations.append((x_t, y_t))
 
-print(locations)
+#print(locations)
 print(len(locations))
+
+
+
+def moveNext(h, t):
+    x_t, y_t = t
+    x_h, y_h = h
+
+    if x_h - x_t > 1:
+      x_t += 1
+      if y_h > y_t: 
+        y_t += 1
+      elif y_h < y_t: 
+        y_t -= 1
+    elif  x_h - x_t < -1: 
+      x_t -= 1
+      if y_h > y_t: 
+        y_t += 1
+      elif y_h < y_t: 
+        y_t -= 1
+    
+
+    if y_h - y_t > 1: 
+      y_t += 1
+      if x_h > x_t: 
+        x_t +=1 
+      elif x_h < x_t:
+        x_t -=1
+    elif  y_h - y_t < -1: 
+      y_t -= 1 
+      if x_h > x_t: 
+        x_t +=1 
+      elif x_h < x_t:
+        x_t -=1
+
+    return [x_t, y_t]
+
+locations2 = [[0,0]]
+rope = [[0,0] for _ in range(10)]
+for d, step in zip(directions, steps): 
+  for s in range(step): 
+    if d == "U": 
+      rope[0][1] += 1
+    elif d == "D":
+      rope[0][1] -= 1
+    elif d == "R":
+      rope[0][0] += 1
+    elif d == "L":
+      rope[0][0] -= 1
+
+    for i in range(1,len(rope)):
+      rope[i] = moveNext(rope[i-1], rope[i])
+    
+    if rope[-1] not in locations2:
+      locations2.append(rope[-1])
+
+print(len(locations2))
