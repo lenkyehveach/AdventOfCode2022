@@ -14,7 +14,23 @@ for line in data:
 s = 0
 for i in [20, 60, 100, 140, 180, 220]:
   
-  print(sum(cycles[:i]))
+ 
   s =s + sum(cycles[:i]) * i
 
 print(s)
+
+# ------ 
+print(cycles)
+positions = [sum(cycles[:i]) for i in range(1, len(cycles))]
+print(positions)
+crt = [['.' for _ in range(40)] for x in range(6)]
+
+for x in range(6): 
+  for i in range(40): 
+    if i-1 <= positions[x*40 + i] <= i +1 : 
+      crt[x][i] = "#" 
+
+
+
+for i in crt: 
+  print(''.join(i))
