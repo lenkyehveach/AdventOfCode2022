@@ -2,7 +2,7 @@ from pprint import pprint
 import re
 
 
-with open("test.txt","r") as f: 
+with open("input11.txt","r") as f: 
   data = f.read()
 
 rules = data.split("\n\n")
@@ -30,13 +30,18 @@ for i in range(len(monkeys)):
   }
   ms.append(monkey)
 
+lcm = 1 
+divs = [x["divis"] for x in ms ]
 
+for x in divs: 
+  lcm = lcm* x
 
-for _ in range(20): 
+print(divs)
+print(lcm)
+for _ in range(10000): 
   print(_)
   for i in range(len(ms)):
-    print("monkey", i)
-    print(ms[i]["operation"], ms[i]["value"])
+    
 
     for item in ms[i]["items"]:
       
@@ -49,9 +54,10 @@ for _ in range(20):
           worry = item * int(ms[i]["value"])
       
       # worry = worry // 3 
+      worry = worry % lcm
       
       ms[i]["inspected"] += 1
-      if worry % ms[i]["divis"] == 0: 
+      if (worry ) % ms[i]["divis"] == 0: 
         t = ms[i]["targets"][0]
         
       else: 
@@ -59,14 +65,12 @@ for _ in range(20):
 
       
 
-      ms[t]["items"].append(worry)
+      ms[t]["items"].append(worry )
       
     ms[i]["items"] = []
 
     
-  for i in range(len(ms)):
-    print(ms[i]["items"])
-  print("----")
+  
 inspections = [x["inspected"] for x in ms]
 print(sorted(inspections, reverse=True))
 ins = sorted(inspections, reverse=True)
